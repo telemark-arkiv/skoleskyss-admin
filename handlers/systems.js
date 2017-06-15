@@ -7,20 +7,12 @@ const logger = require('../lib/logger')
 module.exports.checkSystems = async (request, reply) => {
   const systems = [
     {
-      id: 'buddy',
-      url: `${config.BUDDY_SERVICE_URL}/ping`
-    },
-    {
       id: 'logs',
       url: `${config.LOGS_SERVICE_URL}/ping`
     },
     {
       id: 'auth',
       url: `${config.AUTH_SERVICE_URL}/ping`
-    },
-    {
-      id: 'pdf',
-      url: `${config.PDF_SERVICE_URL}`
     }
   ]
 

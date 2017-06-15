@@ -20,14 +20,6 @@ module.exports = [
     }
   },
   {
-    method: 'GET',
-    path: '/help',
-    handler: handlers.getHelppage,
-    config: {
-      description: 'Show the helppage'
-    }
-  },
-  {
     method: 'POST',
     path: '/search',
     handler: handlers.doSearch,
@@ -40,7 +32,7 @@ module.exports = [
     path: '/ping',
     handler: (request, reply) => reply('pong'),
     config: {
-      description: 'Search',
+      description: 'Ping',
       auth: false
     }
   }

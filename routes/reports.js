@@ -4,19 +4,19 @@ const handlers = require('../handlers/reports')
 
 module.exports = [
   {
-    method: 'GET',
-    path: '/reports/warnings/{groupID}',
-    handler: handlers.getWarningsClassReport,
+    method: 'POST',
+    path: '/reports/applications',
+    handler: handlers.generateApplicationsReport,
     config: {
-      description: 'Warning Reports for a spesific class'
+      description: 'Reports for applications'
     }
   },
   {
     method: 'GET',
-    path: '/reports/followups/{groupID}',
-    handler: handlers.getFollowupsClassReport,
+    path: '/reports',
+    handler: handlers.getReportFrontpage,
     config: {
-      description: 'Followup Reports for a spesific class'
+      description: 'Frontpage for reports'
     }
   }
 ]

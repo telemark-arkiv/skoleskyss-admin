@@ -7,7 +7,7 @@ const repackClassReport = require('../lib/repack-class-report')
 const createViewOptions = require('../lib/create-view-options')
 const logger = require('../lib/logger')
 
-module.exports.getWarningsClassReport = async (request, reply) => {
+module.exports.generateApplicationsReport = async (request, reply) => {
   const yar = request.yar
   const userId = request.auth.credentials.data.userId
   const classId = request.params.groupID
@@ -31,7 +31,7 @@ module.exports.getWarningsClassReport = async (request, reply) => {
   reply.view('report-class-warnings', viewOptions)
 }
 
-module.exports.getFollowupsClassReport = async (request, reply) => {
+module.exports.getReportFrontpage = async (request, reply) => {
   const yar = request.yar
   const userId = request.auth.credentials.data.userId
   const classId = request.params.groupID
@@ -40,18 +40,17 @@ module.exports.getFollowupsClassReport = async (request, reply) => {
   const myContactClasses = yar.get('myContactClasses') || []
   const query = {
     studentMainGroupName: classId,
-    documentType: 'samtale'
+    documentType: 'varsel'
   }
-
-  logger('info', ['reports', 'getFollowupsClassReport', 'class', classId, 'user', userId])
 
   axios.defaults.headers.common['Authorization'] = token
 
+  logger('info', ['reports', 'getWarningsClassReport', 'class', classId, 'user', userId])
   const results = await axios.post(url, query)
 
   const report = myContactClasses.map(line => line.Id).includes(classId) ? repackClassReport(results.data) : []
 
-  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report })
+  const viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report, classId: classId})
 
-  reply.view('report-class-followups', viewOptions)
+  reply.view('report-class-warnings', viewOptions)
 }

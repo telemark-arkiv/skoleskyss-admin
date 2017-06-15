@@ -1,0 +1,25 @@
+# Setting the base to nodejs 8.1.1
+FROM node:8.1.1-alpine
+
+# Maintainer
+MAINTAINER Geir Gåsodden
+
+#### Begin setup ####
+
+# Installs git
+RUN apk add --update --no-cache git
+
+# Bundle app source
+COPY . /src
+
+# Change working directory
+WORKDIR "/src"
+
+# Install dependencies
+RUN npm install --production
+
+# Expose 8000
+EXPOSE 8000
+
+# Startup
+ENTRYPOINT npm start

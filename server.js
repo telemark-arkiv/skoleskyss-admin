@@ -54,7 +54,7 @@ server.register(plugins, (error) => {
 
   server.auth.strategy('session', 'cookie', {
     password: config.COOKIE_SECRET,
-    cookie: 'web-minelev-session',
+    cookie: 'admin-skoleskyss-session',
     validateFunc: validate,
     redirectTo: `${config.AUTH_SERVICE_URL}/login?origin=${config.ORIGIN_URL}`,
     appendNext: 'nextPath',
@@ -99,9 +99,9 @@ function registerRoutes () {
       register: louieService,
       options: {}
     }
-  ], function (err) {
-    if (err) {
-      console.error('Failed to load a plugin:', err)
+  ], error => {
+    if (error) {
+      console.error('Failed to load a plugin:', error)
     }
   })
 }

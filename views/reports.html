@@ -1,25 +1,18 @@
 <div class="mdl-grid">
-    <h1>{{stripSchoolId classId}}</h1>
-    <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
-        <thead>
-        <tr>
-            <th class="mdl-data-table__cell--non-numeric">Navn</th>
-            <th class="mdl-data-table__cell--non-numeric">Periode</th>
-            <th class="mdl-data-table__cell--non-numeric">Angående</th>
-            <th class="mdl-data-table__cell--non-numeric">Sendt av</th>
-            <th class="mdl-data-table__cell--non-numeric">Dato</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each report}}
-        <tr>
-            <td class="mdl-data-table__cell--non-numeric">{{studentName}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{period}}</td>
-            <td class="mdl-data-table__cell--non-numeric"><strong>{{stripSchoolId category}}</strong><br/>{{{newlineToBr description}}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{userName}}</td>
-            <td class="mdl-data-table__cell--non-numeric"><a href="/logs?documentId={{documentId}}" title="Se det opprinnelige dokumentet">{{formatDate date}}</a></td>
-        </tr>
-        {{/each}}
-        </tbody>
-    </table>
+    <div class="mdl-cell mdl-cell--3-col"></div>
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-typography--text-center mdl-typography--headline">
+        <h1>Hent excel-fil</h1>
+        <form action="/reports" method="post">
+            <div class="mdl-textfield mdl-js-textfield mdl-typography--text-center">
+                <input class="mdl-textfield__input" type="text" id="fromDate" name="fromDate" value="{{today}}" required="required">
+                <label class="mdl-textfield__label" for="fromDate">Fra og med dato</label>
+                <input class="mdl-textfield__input" type="text" id="toDate" name="toDate" value="{{today}}" required="required">
+                <label class="mdl-textfield__label" for="toDate">Til og med dato</label>
+            </div>
+            <button type="submit" id="ReportFormSubmit" title="Generer rapport" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color-text--black">
+                <i class="material-icons">view_list</i>
+            </button>
+        </form>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col"></div>
 </div>

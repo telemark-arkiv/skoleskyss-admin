@@ -13,7 +13,9 @@ module.exports.doSearch = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/search`
   const mongoQuery = {
-    '$text': searchText
+    '$text': {
+      '$search': searchText
+    }
   }
 
   logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, 'start'])
@@ -28,7 +30,7 @@ module.exports.doSearch = async (request, reply) => {
     logger('info', ['index', 'doSearch', 'userId', userId, 'got results', viewOptions.logs.length, 'success'])
   } catch (error) {
     viewOptions.logs = []
-    logger('error', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, JSON.stringify(error)])
+    logger('error', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, error])
   }
 
   reply.view('search', viewOptions)

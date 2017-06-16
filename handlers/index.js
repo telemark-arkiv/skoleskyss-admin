@@ -21,7 +21,7 @@ module.exports.getFrontpage = async (request, reply) => {
     logger('info', ['index', 'getFrontpage', 'userId', userId, 'got logs', viewOptions.logs.length])
     reply.view('index', viewOptions)
   }).catch(error => {
-    logger('error', ['index', 'getFrontpage', 'userId', userId, JSON.stringify(error)])
+    logger('error', ['index', 'getFrontpage', 'userId', userId, error])
     viewOptions.logs = []
     reply.view('index', viewOptions)
   })

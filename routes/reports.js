@@ -5,7 +5,7 @@ const handlers = require('../handlers/reports')
 module.exports = [
   {
     method: 'POST',
-    path: '/reports/applications',
+    path: '/reports',
     handler: handlers.generateApplicationsReport,
     config: {
       description: 'Reports for applications'

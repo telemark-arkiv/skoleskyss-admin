@@ -20,14 +20,6 @@ module.exports = [
     }
   },
   {
-    method: 'POST',
-    path: '/search',
-    handler: handlers.doSearch,
-    config: {
-      description: 'Search'
-    }
-  },
-  {
     method: 'GET',
     path: '/ping',
     handler: (request, reply) => reply('pong'),

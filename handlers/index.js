@@ -10,7 +10,6 @@ module.exports.getFrontpage = async (request, reply) => {
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/latest`
-  let mongoQuery = {'userId': userId}
 
   logger('info', ['index', 'getFrontpage', 'userId', userId, 'start'])
 
@@ -43,27 +42,4 @@ module.exports.getLogspage = async (request, reply) => {
 
   logger('info', ['index', 'getLogspage', 'userId', userId, 'single log ok'])
   reply.view('logs-detailed', viewOptions)
-}
-
-module.exports.doSearch = async (request, reply) => {
-  const data = request.payload
-  const searchText = data.searchText
-  const userId = request.auth.credentials.data.userId
-  const token = generateSystemJwt(userId)
-  const url = `${config.LOGS_SERVICE_URL}/logs/search`
-  const mongoQuery = {
-    searchText: searchText
-  }
-
-  logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, 'start'])
-
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, searchText: searchText })
-
-  axios.defaults.headers.common['Authorization'] = token
-  const results = await axios.post(url, mongoQuery)
-  const payload = results.data
-
-  viewOptions.students = payload
-  logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, 'success', payload.length, 'hits'])
-  reply.view('search-results', viewOptions)
 }

@@ -7,7 +7,6 @@ const logger = require('../lib/logger')
 module.exports.doSignIn = async (request, reply) => {
   const token = request.query.jwt
   const nextPath = request.query.nextPath
-  const yar = request.yar
   try {
     const user = await verifySigninJwt(token)
 

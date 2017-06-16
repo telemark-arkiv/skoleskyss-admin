@@ -52,5 +52,5 @@ module.exports.getReportFrontpage = async (request, reply) => {
 
   const viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report, classId: classId})
 
-  reply.view('report-class-warnings', viewOptions)
+  reply.view('reports', viewOptions)
 }

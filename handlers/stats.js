@@ -26,5 +26,5 @@ module.exports.getStats = async (request, reply) => {
 
   const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, stats: stats })
 
-  reply.view('statistikk', viewOptions)
+  reply.view('stats', viewOptions)
 }

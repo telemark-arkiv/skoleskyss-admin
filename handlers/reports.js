@@ -1,12 +1,17 @@
 'use strict'
 
 const axios = require('axios')
+const xlsx = require('tfk-json-to-xlsx')
+const uuid = require('uuid')
+const os = require('os')
+const fs = require('fs')
 const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const datePadding = require('../lib/date-padding')
 const timestampMe = require('../lib/timestamp-me')
 const logger = require('../lib/logger')
+const repackReport = require('../lib/repack-report')
 
 module.exports.generateApplicationsReport = async (request, reply) => {
   const userId = request.auth.credentials.data.userId
@@ -25,14 +30,30 @@ module.exports.generateApplicationsReport = async (request, reply) => {
 
   logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`])
   const results = await axios.post(url, mongoQuery)
+  const report = repackReport(results.data)
+  const directory = process.env.NODE_ENV !== 'development' ? os.tmpdir() : 'test/directories/uploads'
+  const uniqueName = `${uuid.v4()}.xlsx`
+  const filename = `${directory}/${uniqueName}`
 
-  reply(results.data)
-
-  /*
-  const viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report, classId: classId})
-
-  reply.view('report-class-warnings', viewOptions)
-  */
+  xlsx.write(filename, report, function (error) {
+    if (error) {
+      logger('error', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, error])
+      reply(error)
+    } else {
+      reply.file(filename)
+        .header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        .header('Content-Disposition', 'attachment; filename=' + uniqueName)
+        .on('finish', () => {
+          logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, uniqueName, 'success'])
+          try {
+            fs.unlinkSync(filename)
+            logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, uniqueName, 'cleanup finished'])
+          } catch (error) {
+            logger('error', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, 'unlink', error])
+          }
+        })
+    }
+  })
 }
 
 module.exports.getReportFrontpage = async (request, reply) => {

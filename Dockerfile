@@ -1,5 +1,5 @@
-# Setting the base to nodejs 8.1.2
-FROM node:8.1.2-alpine
+# Setting the base to nodejs 8.1.3
+FROM node:8.1.3-alpine
 
 # Maintainer
 MAINTAINER Geir Gåsodden

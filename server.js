@@ -5,6 +5,7 @@ const server = new Hapi.Server()
 const config = require('./config')
 const louieService = require('./index')
 const validate = require('./lib/validateJWT')
+const logger = require('./lib/logger')
 
 const goodOptions = {
   ops: {
@@ -40,7 +41,7 @@ const plugins = [
 
 function endIfError (error) {
   if (error) {
-    console.error(error)
+    logger('error', ['server', 'endiferror', error])
     process.exit(1)
   }
 }
@@ -101,19 +102,19 @@ function registerRoutes () {
     }
   ], error => {
     if (error) {
-      console.error('Failed to load a plugin:', error)
+      logger('error', ['server', 'registerRoutes', error])
     }
   })
 }
 
 module.exports.start = () => {
   server.start(() => {
-    console.log('Server running at:', server.info.uri)
+    logger('info', ['server', 'start', `Server running at: ${server.info.uri}`])
   })
 }
 
 module.exports.stop = () => {
   server.stop(() => {
-    console.log('Server stopped')
+    logger('info', ['server', 'stop', 'server stopped'])
   })
 }

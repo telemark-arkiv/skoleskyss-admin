@@ -44,7 +44,7 @@
   "homepage": "https://github.com/telemark/skoleskyss-admin",
   "now": {
     "alias": [
-      "admin.skoleskyss.win"
+      "admin.skoleskyss.t-fk.no"
     ],
     "type": "npm"
   },
@@ -63,7 +63,6 @@
     "handlebars": "4.0.10",
     "hapi": "16.4.3",
     "hapi-auth-cookie": "7.0.0",
-    "hapi-auth-jwt2": "7.3.0",
     "inert": "4.2.0",
     "jsonwebtoken": "7.4.1",
     "simple-encryptor": "1.1.0",

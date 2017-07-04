@@ -7,6 +7,7 @@ const logs = require('./routes/logs')
 const reports = require('./routes/reports')
 const search = require('./routes/search')
 const systems = require('./routes/systems')
+const ping = require('./routes/ping')
 
 exports.register = (server, options, next) => {
   server.route(routes)
@@ -16,6 +17,7 @@ exports.register = (server, options, next) => {
   server.route(reports)
   server.route(search)
   server.route(systems)
+  server.route(ping)
   next()
 }
 

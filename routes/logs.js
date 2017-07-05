@@ -5,7 +5,7 @@ const handlers = require('../handlers/logs')
 module.exports = [
   {
     method: 'GET',
-    path: '/logs/{logID}',
+    path: '/logs',
     handler: handlers.getLogPage,
     config: {
       description: 'Show the log page'

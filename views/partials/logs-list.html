@@ -13,14 +13,14 @@
         {{#each logs}}
         <tr id="{{documentId}}" class="{{highlightMe documentId ../latestId}}">
             <td class="mdl-data-table__cell--non-numeric">
-                <a href="/logs/{{_id}}" title="Vis detaljert logg for {{fullName}}" class="mdl-color-text--black">
+                <a href="/logs?applicantId{{applicantId}}" title="Vis alle logger for {{name}}" class="mdl-color-text--black">
                     <span class="material-icons">list</span>
                 </a>
             </td>
-            <td class="mdl-data-table__cell--non-numeric">{{fullName}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{schoolName}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{name}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{school}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{latestDocumentStatus documentStatus}}</td>
-            <td class="mdl-data-table__cell--non-numeric"><a href="/logs/{{_id}}" title="Vis loggen">{{latestDocumentStatusTimestamp documentStatus}}</a></td>
+            <td class="mdl-data-table__cell--non-numeric"><a href="/logs?documentId={{logId}}" title="Vis detaljert logg">{{latestDocumentStatusTimestamp documentStatus}}</a></td>
         </tr>
         {{/each}}
         </tbody>

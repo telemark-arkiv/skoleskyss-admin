@@ -39,5 +39,5 @@ module.exports.getLogspage = async (request, reply) => {
     }
   }
   let viewOptions = createViewOptions({ credentials: request.auth.credentials, logs: logs.map(repackLogs) })
-  reply.view('logs-detailed', viewOptions)
+  reply.view('log', viewOptions)
 }

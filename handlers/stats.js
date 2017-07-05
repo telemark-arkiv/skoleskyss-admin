@@ -14,6 +14,7 @@ module.exports.getStats = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const urlTotal = `${config.LOGS_SERVICE_URL}/stats/total`
   const urlSchools = `${config.LOGS_SERVICE_URL}/stats/schools`
+  const urlCategories = `${config.LOGS_SERVICE_URL}/stats/categories`
   if (!isAdmin) {
     reply.redirect('/noaccess')
   } else {
@@ -21,9 +22,9 @@ module.exports.getStats = async (request, reply) => {
 
     axios.defaults.headers.common['Authorization'] = token
 
-    const [total, schools] = await Promise.all([axios.get(urlTotal), axios.get(urlSchools)])
+    const [total, schools, categories] = await Promise.all([axios.get(urlTotal), axios.get(urlSchools), axios.get(urlCategories)])
 
-    const stats = repackStats({total: total.data, schools: schools.data})
+    const stats = repackStats({total: total.data, schools: schools.data, categories: categories.data})
 
     const viewOptions = createViewOptions({ credentials: request.auth.credentials, stats: stats })
 

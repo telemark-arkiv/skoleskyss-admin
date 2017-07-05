@@ -1,9 +1,9 @@
 'use strict'
 
-var formatDate = require('./formatDate')
+const formatDate = require('./formatDate')
 
 module.exports = function (statuses) {
-  var latest = statuses ? statuses[statuses.length - 1] : false
+  const latest = statuses ? statuses[statuses.length - 1] : false
   if (latest) {
     return formatDate(latest.timeStamp)
   } else {

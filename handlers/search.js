@@ -5,6 +5,7 @@ const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const logger = require('../lib/logger')
+const repackLogs = require('../lib/repack-logs')
 
 module.exports.doSearch = async (request, reply) => {
   const yar = request.yar
@@ -31,7 +32,7 @@ module.exports.doSearch = async (request, reply) => {
 
     try {
       const results = await axios.post(url, mongoQuery)
-      viewOptions.logs = results.data
+      viewOptions.logs = results.data.map(repackLogs)
       logger('info', ['index', 'doSearch', 'userId', userId, 'got results', viewOptions.logs.length, 'success'])
     } catch (error) {
       viewOptions.logs = []

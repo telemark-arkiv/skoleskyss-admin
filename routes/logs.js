@@ -6,7 +6,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/logs',
-    handler: handlers.getLogPage,
+    handler: handlers.getLogspage,
     config: {
       description: 'Show the log page'
     }

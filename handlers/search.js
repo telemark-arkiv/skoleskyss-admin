@@ -7,6 +7,8 @@ const createViewOptions = require('../lib/create-view-options')
 const logger = require('../lib/logger')
 
 module.exports.doSearch = async (request, reply) => {
+  const yar = request.yar
+  const isAdmin = yar.get('isAdmin')
   const data = request.payload
   const searchText = data.searchText
   const userId = request.auth.credentials.data.userId
@@ -18,20 +20,24 @@ module.exports.doSearch = async (request, reply) => {
     }
   }
 
-  logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, 'start'])
+  if (!isAdmin) {
+    reply.redirect('/noaccess')
+  } else {
+    logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, 'start'])
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, searchText: searchText })
+    let viewOptions = createViewOptions({ credentials: request.auth.credentials, searchText: searchText })
 
-  axios.defaults.headers.common['Authorization'] = token
+    axios.defaults.headers.common['Authorization'] = token
 
-  try {
-    const results = await axios.post(url, mongoQuery)
-    viewOptions.logs = results.data
-    logger('info', ['index', 'doSearch', 'userId', userId, 'got results', viewOptions.logs.length, 'success'])
-  } catch (error) {
-    viewOptions.logs = []
-    logger('error', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, error])
+    try {
+      const results = await axios.post(url, mongoQuery)
+      viewOptions.logs = results.data
+      logger('info', ['index', 'doSearch', 'userId', userId, 'got results', viewOptions.logs.length, 'success'])
+    } catch (error) {
+      viewOptions.logs = []
+      logger('error', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, error])
+    }
+
+    reply.view('search', viewOptions)
   }
-
-  reply.view('search', viewOptions)
 }

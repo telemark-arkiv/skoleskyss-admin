@@ -10,13 +10,5 @@ module.exports = [
     config: {
       description: 'Show the frontpage'
     }
-  },
-  {
-    method: 'GET',
-    path: '/logs',
-    handler: handlers.getLogspage,
-    config: {
-      description: 'Show the logspage'
-    }
   }
 ]

@@ -10,5 +10,13 @@ module.exports = [
     config: {
       description: 'Show the frontpage'
     }
+  },
+  {
+    method: 'GET',
+    path: '/noaccess',
+    handler: handlers.showNoAccess,
+    config: {
+      description: 'Show the no access page'
+    }
   }
 ]

@@ -14,7 +14,7 @@ module.exports.doSignIn = async (request, reply) => {
     logger('info', ['auth', 'doSignIn', 'token is valid'])
     try {
       const user = await lookupUser(token)
-      logger('info', ['auth', 'doSignIn', 'user verified', 'userId', user.userId])
+      logger('info', ['auth', 'doSignIn', 'user verified', 'userId', user.userId, 'admin', user.isAdmin])
 
       yar.set('isAdmin', user.isAdmin)
 

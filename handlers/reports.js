@@ -20,7 +20,7 @@ module.exports.generateApplicationsReport = async (request, reply) => {
   const fromDate = timestampMe(`${request.payload.fromDate} 00:00:01`)
   const toDate = timestampMe(`${request.payload.toDate} 23:59:59`)
   const mongoQuery = {
-    timeStamp: {
+    skjemaUtfyllingStop: {
       $gte: parseInt(fromDate),
       $lte: parseInt(toDate)
     }

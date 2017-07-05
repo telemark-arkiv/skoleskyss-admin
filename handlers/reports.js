@@ -35,7 +35,7 @@ module.exports.generateApplicationsReport = async (request, reply) => {
 
     logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`])
     const results = await axios.post(url, mongoQuery)
-    const report = results.data.map(repackLogs())
+    const report = results.data.map(repackLogs)
     const uniqueName = `${uuid.v4()}.xlsx`
     const filename = `${os.tmpdir()}/${uniqueName}`
 

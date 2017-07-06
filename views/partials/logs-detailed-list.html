@@ -21,19 +21,19 @@
                 <table>
                     <tr>
                         <td>SøkerID</td>
-                        <td>{{applicantId}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{applicantId}}</td>
                     </tr>
                     <tr>
                         <td>Adresse</td>
-                        <td>{{street}}, {{zip}} {{city}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{street}}, {{zip}} {{city}}</td>
                     </tr>
                     <tr>
                         <td>Adresse 2</td>
-                        <td>{{street2}}, {{zip2}} {{city2}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{street2}}, {{zip2}} {{city2}}</td>
                     </tr>
                     <tr>
                         <td>Transportører</td>
-                        <td>{{transporters}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{transporters}}</td>
                     </tr>
                 </table>
                 {{#each documentStatus}}
@@ -43,6 +43,6 @@
         </tr>
         </tbody>
     </table>
-    <div></div>
+    <div class="spacer"></div>
     {{/each}}
 </div>

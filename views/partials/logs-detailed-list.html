@@ -5,6 +5,7 @@
         <tr>
             <th class="mdl-data-table__cell--non-numeric">Søker</th>
             <th class="mdl-data-table__cell--non-numeric">Skole</th>
+            <th class="mdl-data-table__cell--non-numeric">Status</th>
             <th class="mdl-data-table__cell--non-numeric">Dato</th>
         </tr>
         </thead>
@@ -12,10 +13,29 @@
         <tr>
             <td class="mdl-data-table__cell--non-numeric">{{name}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{school}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{status}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{formatDate submitted}}</td>
         </tr>
         <tr>
             <td class="mdl-data-table__cell--non-numeric" colspan="3">
+                <table>
+                    <tr>
+                        <td>SøkerID</td>
+                        <td>{{applicantId}}</td>
+                    </tr>
+                    <tr>
+                        <td>Adresse</td>
+                        <td>{{street}}, {{zip}} {{city}}</td>
+                    </tr>
+                    <tr>
+                        <td>Adresse 2</td>
+                        <td>{{street2}}, {{zip2}} {{city2}}</td>
+                    </tr>
+                    <tr>
+                        <td>Transportører</td>
+                        <td>{{transporters}}</td>
+                    </tr>
+                </table>
                 {{#each documentStatus}}
                   {{formatDateTime timeStamp}} - {{status}}<br/>
                 {{/each}}
@@ -23,5 +43,6 @@
         </tr>
         </tbody>
     </table>
+    <div></div>
     {{/each}}
 </div>

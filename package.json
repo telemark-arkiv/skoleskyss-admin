@@ -1,6 +1,6 @@
 {
   "name": "skoleskyss-admin",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Adminsolution for skoleskyss",
   "license": "MIT",
   "private": true,
@@ -68,6 +68,9 @@
     "jsonwebtoken": "7.4.1",
     "simple-encryptor": "1.1.0",
     "tfk-json-to-xlsx": "1.0.11",
+    "tfk-saksbehandling-skoleskyss-fara": "^4.0.17",
+    "tfk-saksbehandling-skoleskyss-nsb": "^3.0.15",
+    "tfk-saksbehandling-skoleskyss-tbr": "^6.0.12",
     "uuid": "3.1.0",
     "vision": "4.1.1",
     "winston": "2.3.1",

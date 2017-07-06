@@ -6,6 +6,7 @@
             <th class="mdl-data-table__cell--non-numeric">Søker</th>
             <th class="mdl-data-table__cell--non-numeric">Skole</th>
             <th class="mdl-data-table__cell--non-numeric">Status</th>
+            <th class="mdl-data-table__cell--non-numeric">Logg</th>
             <th class="mdl-data-table__cell--non-numeric">Dato</th>
         </tr>
         </thead>
@@ -19,6 +20,7 @@
             </td>
             <td class="mdl-data-table__cell--non-numeric">{{name}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{school}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{status}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{latestDocumentStatus documentStatus}}</td>
             <td class="mdl-data-table__cell--non-numeric"><a href="/logs?documentId={{logId}}" title="Vis detaljert logg">{{latestDocumentStatusTimestamp documentStatus}}</a></td>
         </tr>

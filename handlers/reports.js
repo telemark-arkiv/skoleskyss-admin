@@ -11,6 +11,7 @@ const datePadding = require('../lib/date-padding')
 const timestampMe = require('../lib/timestamp-me')
 const logger = require('../lib/logger')
 const repackLogs = require('../lib/repack-logs')
+const filterPropsForExcel = require('../lib/filter-props-for-excel')
 const generateExcelFile = require('../lib/generate-excel-file')
 
 module.exports.generateApplicationsReport = async (request, reply) => {
@@ -35,7 +36,7 @@ module.exports.generateApplicationsReport = async (request, reply) => {
 
     logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`])
     const results = await axios.post(url, mongoQuery)
-    const report = results.data.map(repackLogs)
+    const report = results.data.map(repackLogs).map(filterPropsForExcel)
     const uniqueName = `${uuid.v4()}.xlsx`
     const filename = `${os.tmpdir()}/${uniqueName}`
 

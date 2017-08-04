@@ -15,6 +15,8 @@ module.exports.getStats = async (request, reply) => {
   const urlTotal = `${config.LOGS_SERVICE_URL}/stats/total`
   const urlSchools = `${config.LOGS_SERVICE_URL}/stats/schools`
   const urlCategories = `${config.LOGS_SERVICE_URL}/stats/categories`
+  const urlBosted = `${config.LOGS_SERVICE_URL}/stats/bosted`
+  const urlStatus = `${config.LOGS_SERVICE_URL}/stats/status`
   if (!isAdmin) {
     reply.redirect('/noaccess')
   } else {
@@ -22,9 +24,9 @@ module.exports.getStats = async (request, reply) => {
 
     axios.defaults.headers.common['Authorization'] = token
 
-    const [total, schools, categories] = await Promise.all([axios.get(urlTotal), axios.get(urlSchools), axios.get(urlCategories)])
+    const [total, schools, categories, bosted, status] = await Promise.all([axios.get(urlTotal), axios.get(urlSchools), axios.get(urlCategories), axios.get(urlBosted), axios.get(urlStatus)])
 
-    const stats = repackStats({total: total.data, schools: schools.data, categories: categories.data})
+    const stats = repackStats({total: total.data, schools: schools.data, categories: categories.data, bosted: bosted.data, status: status.data})
 
     const viewOptions = createViewOptions({ credentials: request.auth.credentials, stats: stats })
 

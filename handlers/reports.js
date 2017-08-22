@@ -35,26 +35,32 @@ module.exports.generateApplicationsReport = async (request, reply) => {
     axios.defaults.headers.common['Authorization'] = token
 
     logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`])
-    const results = await axios.post(url, mongoQuery)
-    const report = results.data.map(repackLogs).map(filterPropsForExcel)
-    const uniqueName = `${uuid.v4()}.xlsx`
-    const filename = `${os.tmpdir()}/${uniqueName}`
 
-    await generateExcelFile({filename: filename, data: report})
-    const excel = fs.readFileSync(filename)
+    try {
+      const results = await axios.post(url, mongoQuery)
+      const report = results.data.map(repackLogs).map(filterPropsForExcel)
+      const uniqueName = `${uuid.v4()}.xlsx`
+      const filename = `${os.tmpdir()}/${uniqueName}`
 
-    reply(excel)
-      .header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-      .header('Content-Disposition', 'attachment; filename=' + uniqueName)
-      .on('finish', () => {
-        logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, uniqueName, 'success'])
-        try {
-          fs.unlinkSync(filename)
-          logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, uniqueName, 'cleanup finished'])
-        } catch (error) {
-          logger('error', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, 'unlink', error])
-        }
-      })
+      await generateExcelFile({filename: filename, data: report})
+      const excel = fs.readFileSync(filename)
+
+      reply(excel)
+        .header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        .header('Content-Disposition', 'attachment; filename=' + uniqueName)
+        .on('finish', () => {
+          logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, uniqueName, 'success'])
+          try {
+            fs.unlinkSync(filename)
+            logger('info', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, uniqueName, 'cleanup finished'])
+          } catch (error) {
+            logger('error', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, 'unlink', error])
+          }
+        })
+    } catch (error) {
+      logger('error', ['reports', 'generateApplicationsReport', 'user', userId, `${request.payload.fromDate} - ${request.payload.toDate}`, error])
+      reply(error)
+    }
   }
 }
 

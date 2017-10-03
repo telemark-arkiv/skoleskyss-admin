@@ -64,7 +64,7 @@
     "handlebars": "4.0.10",
     "hapi": "16.6.2",
     "hapi-auth-cookie": "7.0.0",
-    "inert": "5.0.0-rc1",
+    "inert": "5.0.0-rc2",
     "jsonwebtoken": "8.0.1",
     "simple-encryptor": "1.1.0",
     "tfk-json-to-xlsx": "1.0.11",

@@ -11,7 +11,7 @@
   },
   "main": "index.js",
   "engines": {
-    "node": ">=8.4.0"
+    "node": ">=8.9.3"
   },
   "scripts": {
     "test": "standard && nsp check && ava",
@@ -46,7 +46,10 @@
     "alias": [
       "admin.skoleskyss.t-fk.no"
     ],
-    "type": "npm"
+    "type": "npm",
+    "engines": {
+      "node": "8.9.3"
+    }
   },
   "devDependencies": {
     "ava": "0.24.0",
@@ -62,9 +65,9 @@
     "good-console": "6.4.1",
     "good-squeeze": "5.0.2",
     "handlebars": "4.0.11",
-    "hapi": "17.1.1",
-    "hapi-auth-cookie": "8.0.0",
-    "inert": "5.0.0-rc2",
+    "hapi": "16.6.2",
+    "hapi-auth-cookie": "7.0.0",
+    "inert": "4.2.1",
     "jsonwebtoken": "8.1.0",
     "simple-encryptor": "1.1.1",
     "tfk-json-to-xlsx": "1.0.11",
@@ -73,8 +76,8 @@
     "tfk-saksbehandling-skoleskyss-tbr": "6.0.22",
     "uuid": "3.1.0",
     "vision": "4.1.1",
-    "winston": "3.0.0-rc0",
+    "winston": "2.4.0",
     "winston-papertrail": "1.0.5",
-    "yar": "9.0.1"
+    "yar": "8.1.2"
   }
 }

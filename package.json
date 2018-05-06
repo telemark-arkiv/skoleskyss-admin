@@ -70,7 +70,7 @@
     "handlebars": "4.0.11",
     "hapi": "16.6.3",
     "hapi-auth-cookie": "7.0.0",
-    "inert": "4.2.1",
+    "inert": "5.1.0",
     "jsonwebtoken": "8.2.1",
     "simple-encryptor": "1.2.0",
     "tfk-json-to-xlsx": "1.0.11",
